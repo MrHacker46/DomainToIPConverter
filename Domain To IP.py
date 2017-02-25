@@ -3,8 +3,8 @@
 #Team_CC
 import re, urllib2
 headers = { 'User-Agent' : 'Mozilla/5.0' }
-filename = raw_input('Type the domain list filename: \n')
-fileopen = open(filename, 'r').readlines()
+fileopen = open('s.txt', 'r').readlines()
+unique=[]
 for i in fileopen:
     try:
         i = i.replace('\n','')
@@ -15,9 +15,14 @@ for i in fileopen:
         html = urllib2.urlopen(req).read()
         found = re.findall('<title>.[\w]+.[\w]+.[\w]+.[\w]+',html)
         found[0] = found[0].replace('<title>','')
+        if 'Reverse' in found[0]:
+            continue
         print 'IP is:', found[0]
-        open('IP_collected.txt', 'a+').write(found[0] + '\n')
+        unique.append(found[0])
     except:
         print 'Found error on', i
         pass
+unique = list(set(unique))
+for i in unique:
+    open('IP_collected.txt', 'a+').write(i + '\n')
 print 'All saved as IP_collected.txt'
