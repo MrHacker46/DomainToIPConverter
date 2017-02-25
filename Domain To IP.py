@@ -1,6 +1,10 @@
+#Greetings to Domaintools
+#Coded by Exploiter~Xed
+#Team_CC
 import re, urllib2
 headers = { 'User-Agent' : 'Mozilla/5.0' }
-fileopen = open('s.txt', 'r').readlines()
+filename = raw_input('Type the domain list filename: \n')
+fileopen = open(filename, 'r').readlines()
 for i in fileopen:
     try:
         i = i.replace('\n','')
